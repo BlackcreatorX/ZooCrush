@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "ZooCrushControls",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "68652ba4-2fb8-4add-859b-21fe15935eef",
+            "actions": [
+                {
+                    "name": "Point",
+                    "type": "Value",
+                    "id": "40eca028-4a0e-4465-955c-e35f1d5ff647",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "d03c5de9-8a1e-43e4-9066-8beec04024d8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ebcbfd91-022a-4adf-b94a-6662def439d3",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8987cce9-e778-4e01-8f9b-a7e41d505d82",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
