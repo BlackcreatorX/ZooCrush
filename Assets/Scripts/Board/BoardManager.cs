@@ -7,6 +7,8 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private int width = 8;
     [SerializeField] private int height = 8;
     [SerializeField] private float cellSize = 0.9f;
+    public int Width => width;
+    public int Height => height;
 
     [Header("Animal Prefabs")]
     [SerializeField] private GameObject[] animalPrefabs;
@@ -119,5 +121,22 @@ private Vector2 GetWorldPosition(int x, int y)
         y * cellSize - (height - 1) * cellSize / 2f
     );
 }
+public AnimalPiece GetPiece(int x, int y)
+{
+    if (x < 0 || x >= width || y < 0 || y >= height)
+        return null;
 
+    if (board[x, y] == null)
+        return null;
+
+    return board[x, y].GetComponent<AnimalPiece>();
+}
+public int GetPieceType(int x, int y)
+{
+    return boardTypes[x, y];
+}
+public void SwapBack(AnimalPiece pieceA, AnimalPiece pieceB)
+{
+    SwapPieces(pieceA, pieceB);
+}
 }

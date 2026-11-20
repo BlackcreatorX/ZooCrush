@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private BoardManager boardManager;
+    [SerializeField] private MatchDetector matchDetector;
     [SerializeField] private Camera mainCamera;
 
     private AnimalPiece selectedPiece;
@@ -17,6 +18,7 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         clickAction.action.performed += OnClick;
+
         pointAction.action.Enable();
         clickAction.action.Enable();
     }
@@ -24,12 +26,12 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         clickAction.action.performed -= OnClick;
+
         pointAction.action.Disable();
         clickAction.action.Disable();
     }
 
-    private void OnClick(
-        InputAction.CallbackContext context)
+    private void OnClick(InputAction.CallbackContext context)
     {
         Vector2 screenPosition =
             pointAction.action.ReadValue<Vector2>();
@@ -77,16 +79,34 @@ public class InputManager : MonoBehaviour
 
         if (distanceX + distanceY == 1)
         {
-            boardManager.SwapPieces(
-                selectedPiece,
-                clickedPiece
-            );
-
+            TrySwap(selectedPiece, clickedPiece);
             DeselectPiece();
         }
         else
         {
             SelectPiece(clickedPiece);
+        }
+    }
+
+    private void TrySwap(
+        AnimalPiece pieceA,
+        AnimalPiece pieceB)
+    {
+        boardManager.SwapPieces(pieceA, pieceB);
+
+        var matches = matchDetector.FindMatches();
+
+        if (matches.Count == 0)
+        {
+            boardManager.SwapPieces(pieceA, pieceB);
+
+            Debug.Log("Movimiento inválido: no hay combinación.");
+        }
+        else
+        {
+            Debug.Log(
+                $"Movimiento válido: {matches.Count} piezas detectadas."
+            );
         }
     }
 
